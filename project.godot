@@ -11,8 +11,17 @@ config_version=4
 [application]
 
 config/name="DillyDally defence"
-run/main_scene="res://Scenes/MainScenes/GameScene.tscn"
+run/main_scene="res://Scenes/MainScenes/SceneHandler.tscn"
 config/icon="res://assets/Tower sprites/icon.png"
+
+[autoload]
+
+GameData="*res://Singletons/GameData.gd"
+
+[display]
+
+mouse_cursor/custom_image="res://Resources/User Interface/Art/cursor_pointerFlat_shadow.png"
+window/stretch/mode="viewport"
 
 [gui]
 

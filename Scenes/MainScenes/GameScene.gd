@@ -6,14 +6,18 @@ var build_mode = false
 var build_valid = false
 var build_location
 var build_type
-
+var current_wave = 0
+var enemies_in_wave = 0
+##
+## seclection functions
+##
 func _ready():
 	map_node = get_node("Map1")
 	for index in get_tree().get_nodes_in_group("build_buttons"):
 		index.connect("pressed", self, "initiate_build_mode", [index.get_name()])
 
 
-func _process(delta):
+func _process(_delta):
 	if build_mode:
 		update_tower_preview()
 
@@ -25,8 +29,17 @@ func _unhandled_input(event):
 		verify_and_build()
 		cancel_build_mode()
 
+##
+## Wave functions
+##
 
+
+##
+## build functions
+##
 func initiate_build_mode(tower_type):
+	if build_mode:
+		cancel_build_mode()
 	build_type = tower_type + "T1"
 	build_mode = true
 	get_node("UserInterface").set_tower_preview(build_type, get_global_mouse_position())
@@ -35,21 +48,20 @@ func initiate_build_mode(tower_type):
 func update_tower_preview():
 	var mouse_position = get_global_mouse_position()
 	var current_tile = map_node.get_node("TowerExculusion").world_to_map(mouse_position)
-	var tile_position = map_node.get_node("TowerExculusion").map_to_world(current_tile)
 	
-	if map_node.get_node("TowerExculusion").get_cellv(current_tile) == -1:
-		get_node("UserInterface").update_tower_preview(tile_position, "ad54ff3c")
+	if map_node.get_node("TowerExculusion").get_cellv(current_tile):
+		get_node("UserInterface").update_tower_preview(mouse_position, "ad54ff3c")
 		build_valid = true
-		build_location = tile_position
+		build_location = mouse_position
 	else:
-		get_node("UserInterface").update_tower_preview(tile_position, "adff4545")
+		get_node("UserInterface").update_tower_preview(mouse_position, "adff4545")
 		build_valid = false
 
 
 func cancel_build_mode():
 	build_mode = false
 	build_valid = false
-	get_node("UserInterface/TowerPreview").queue_free()
+	get_node("UserInterface/TowerPreview").free()
 
 
 func verify_and_build():
@@ -57,6 +69,7 @@ func verify_and_build():
 		## test to see if player has enough money
 		var new_tower = load("res://Scenes/Towers/" + build_type + ".tscn").instance()
 		new_tower.position = build_location
+		new_tower.built = true
 		map_node.get_node("Towers").add_child(new_tower, true)
 		## deduct cash
 		## update cash lable
