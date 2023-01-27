@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/Enemies/Enemy_path.gd" type="Script" id=1]
 [ext_resource path="res://assets/Enemy sprites/HomeWork-Paper-1.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 11.5 )
 
 [node name="Empty enemy" type="PathFollow2D"]
-script = ExtResource( 1 )
+script = SubResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 2

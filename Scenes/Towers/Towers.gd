@@ -5,6 +5,7 @@ var enemy_array = []
 var built = false
 var enemy
 var ready = true
+var Money = 150
 
 func _ready():
 	if built:

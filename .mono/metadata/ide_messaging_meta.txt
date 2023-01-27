@@ -1,2 +1,2 @@
-﻿1619
+﻿1212
 C:/Users/Gustas/Desktop/Godot_v3.5.1-stable_mono_win64/Godot_v3.5.1-stable_mono_win64.exe

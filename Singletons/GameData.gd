@@ -5,9 +5,11 @@ var tower_data = {
 		"damage": 20,
 		"rof": 1,
 		"range": 350,
-		"Price": 5},
+		"Price": 50,
+		"Money": 20},
 	"MissleT1": {
 		"damage": 1000,
 		"rof": 3,
 		"range": 550,
-		"Price": 10}}
+		"Price": 100,
+		"Money": 25}}
