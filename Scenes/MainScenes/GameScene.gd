@@ -3,12 +3,12 @@ extends Node2D
 var map_node
 
 var build_mode = false
-var Money = 150
 var build_valid = false
 var build_location
 var build_type
 var current_wave = 0
 var enemies_in_wave = 0
+var Money = 150
 ##
 ## seclection functions
 ##
@@ -32,10 +32,9 @@ func _unhandled_input(event):
 		cancel_build_mode()
 
 ##
-## Wave functions
+## Wave functions (DELETED)
 ##
-
-
+	
 ##
 ## build functions
 ##
@@ -73,9 +72,11 @@ func verify_and_build():
 		if Money >= Price:
 			var new_tower = load("res://Scenes/Towers/" + build_type + ".tscn").instance()
 			new_tower.position = build_location
+			new_tower.built = true
 			new_tower.type = build_type
 			map_node.get_node("Towers").add_child(new_tower, true)
-			## deduct cash
 			Money -= Price
-			## update cash lable
-	$UserInterface/HUD/Money_counter.text = str("Cash: ", Money)
+			print(Money)
+			$UserInterface/HUD/Money_counter.text = str("Cash: ", Money)
+		## deduct cash
+		## update cash lable

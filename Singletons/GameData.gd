@@ -11,13 +11,3 @@ var tower_data = {
 		"rof": 3,
 		"range": 550,
 		"Price": 10}}
-
-
-var Enemy_data = {
-	"Paper": {
-		"health": 100,
-		"Speed": 15000,
-		"Reward": 1,
-		"base_damage": 4.20
-	}
-}
