@@ -3,6 +3,7 @@ extends Node2D
 var map_node
 
 var build_mode = false
+var Money = 150
 var build_valid = false
 var build_location
 var build_type
@@ -15,6 +16,7 @@ func _ready():
 	map_node = get_node("Map1")
 	for index in get_tree().get_nodes_in_group("build_buttons"):
 		index.connect("pressed", self, "initiate_build_mode", [index.get_name()])
+	$UserInterface/HUD/Money_counter.text = str("Cash: ", Money)
 
 
 func _process(_delta):
@@ -67,9 +69,13 @@ func cancel_build_mode():
 func verify_and_build():
 	if build_valid:
 		## test to see if player has enough money
-		var new_tower = load("res://Scenes/Towers/" + build_type + ".tscn").instance()
-		new_tower.position = build_location
-		new_tower.built = true
-		map_node.get_node("Towers").add_child(new_tower, true)
-		## deduct cash
-		## update cash lable
+		var Price = GameData.tower_data[build_type]["Price"]
+		if Money >= Price:
+			var new_tower = load("res://Scenes/Towers/" + build_type + ".tscn").instance()
+			new_tower.position = build_location
+			new_tower.type = build_type
+			map_node.get_node("Towers").add_child(new_tower, true)
+			## deduct cash
+			Money -= Price
+			## update cash lable
+	$UserInterface/HUD/Money_counter.text = str("Cash: ", Money)

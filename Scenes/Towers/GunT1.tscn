@@ -21,6 +21,8 @@ offset = Vector2( 12, 0 )
 position = Vector2( 41, 0 )
 
 [node name="Range" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource( 1 )
