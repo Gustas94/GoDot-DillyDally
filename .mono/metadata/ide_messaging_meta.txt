@@ -1,2 +1,2 @@
-﻿1307
-C:/Users/Gustas/Desktop/Godot_v3.5.1-stable_mono_win64/Godot_v3.5.1-stable_mono_win64.exe
+﻿63467
+D:/Godot Engine/Godot_v3.5.1-stable_mono_win64/Godot_v3.5.1-stable_mono_win64.exe
