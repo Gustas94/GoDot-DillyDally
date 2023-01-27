@@ -8,6 +8,7 @@ var build_location
 var build_type
 var current_wave = 0
 var enemies_in_wave = 0
+var wave_data
 var Money = 150
 ##
 ## seclection functions
@@ -37,12 +38,16 @@ func _unhandled_input(event):
 ##
 func start_next_wave():
 	var wave_data = retrieve_wave_data()
-	yield(get_tree().create_timer(0.2),"timeout")
+	yield(get_tree().create_timer(5),"timeout")
 	spawn_enemies(wave_data)
+	start_next_wave()
 	
 func retrieve_wave_data():
-	var wave_data = [["Paper", 0.7], ["Paper", 0.1]]
 	current_wave += 1
+	if current_wave == 1:
+		wave_data = [["Paper", 0.7], ["Paper", 0.1],["Book", 0.1]]
+	if current_wave == 2:
+		wave_data = [["Paper", 0.7], ["Paper", 0.1],["Book", 0.1],["Book", 0.1],["Book", 0.1]]
 	enemies_in_wave = wave_data.size()
 	return wave_data
 		
@@ -51,6 +56,7 @@ func spawn_enemies(wave_data):
 		var new_enemy = load("res://Scenes/Enemies/" + i[0] + ".tscn").instance()
 		map_node.get_node("Path").add_child(new_enemy, true)
 		yield(get_tree().create_timer(i[1]), "timeout")
+		
 ##
 ## build functions
 ##
